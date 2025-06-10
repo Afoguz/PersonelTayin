@@ -1,0 +1,54 @@
+﻿@model PersonelTayin.Models.Basvuru
+
+@{
+    ViewData["Title"] = "Tayin Talep Formu";
+    var iller = ViewBag.Iller as List<SelectListItem>; 
+}
+
+
+@if (!string.IsNullOrEmpty(TempData["Basari"] as string))
+{
+    <div class="alert alert-success">@TempData["Basari"]</div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+
+<h2>Tayin Talep Formu</h2>
+
+<form asp-action="TayinTalepGonder" method="post">
+    <div class="form-group">
+        <label for="AdliyeAdiId">İl Seçin:</label>
+        <select class="form-control" name="AdliyeAdiId" required>
+            <option value="">-- İl Seçiniz --</option>
+            @foreach (var il in iller)
+            {
+                <option value="@il.Value">@il.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="BasvuruTuru">Tayin Türü:</label>
+        <select class="form-control" name="tayinTuru" required>
+            <option value="">-- Tayin Türü Seçiniz --</option>
+            <option value="GeciciGorevlendirme">Geçici Görevlendirme</option>
+            <option value="NaklenAtama">Naklen Atama</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aciklama">Açıklama (En fazla 500 karakter):</label>
+        <textarea class="form-control" name="aciklama" maxlength="500" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Başvuru Gönder</button>
+</form>

@@ -1,0 +1,62 @@
+﻿@model PersonelTayin.Models.Basvuru
+
+@{
+    ViewData["Title"] = "Tayin Talep Formu";
+    var iller = ViewBag.Iller as List<SelectListItem>;
+}
+<link href="~/css/form.css" rel="stylesheet" />
+
+
+@if (!string.IsNullOrEmpty(TempData["Basarili"] as string))
+{
+    <div class="alert alert-success">@TempData["Basarili"]</div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<div class="container pt-5 mt-4">
+    <div class="header mb-4 d-flex justify-content-between align-items-center">
+        <a href="/" class="logo">Personel Tayin Sistemi - Başvuru Ekranı</a>
+        <nav class="navbar">
+            <a href="/Account/Dashboard">Geri</a>
+            <a href="/Home/Index">Oturumu Kapat</a>
+        </nav>
+    </div>
+
+    <form asp-action="Basarili" method="post">
+        <div class="form-group mb-3">
+            <label for="AdliyeAdiId">İl Seçin:</label>
+            <select class="form-control" name="AdliyeAdiId" id="AdliyeAdiId" required>
+                <option value="">-- İl Seçiniz --</option>
+                @foreach (var item in (List<SelectListItem>)ViewBag.AdliyeListesi)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="BasvuruTuru">Tayin Türü:</label>
+            <select class="form-control" name="tayinTuru" required>
+                <option value="">-- Tayin Türü Seçiniz --</option>
+                <option value="GeciciGorevlendirme">Geçici Görevlendirme</option>
+                <option value="NaklenAtama">Naklen Atama</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="aciklama">Açıklama (En fazla 500 karakter):</label>
+            <textarea class="form-control" name="aciklama" maxlength="500" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Başvuru Gönder</button>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+﻿@using PersonelTayin.Entities
+
+@model UserAccount
+@{
+    ViewData["Title"] = "PERSONEL GİRİŞİ ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>BURAYA PERSONELİN GİRİŞ YAPABİLMESİ İÇİN PASSWORD VERİLMESİ LAZIM .</p>
+
+<p>
+    0) Yukarıdaki personel girişi sekmesinin buraya yönlendirmesi lazım
+    1) Personel şifre ile bu sayfaya erişecek
+    2) Sayfa girilen id ve pasaporta göre personelin temeli bilgileri ile karşılanacak
+    3) Bu ekrandan personel başvuru yapabilecek ( TABLO EKLENECEK )
+    4) Personelin tain talebi burada görünebilecek ( SADIK TURAN TURUNCU RENKLİ EĞİTİMİNDE VAR)
+</p>
+
+<table class="table">
+    <thead>
+        <tr>           
+
+            <th scope="col">Personel Bilgileri</th>
+            <th scope="col">Ahmet Furkan Oğuz</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <th scope="row"></th>
+            <td>İcra Kâtibi</td>
+        </tr>
+        <tr>
+            <th scope="row">Sicil</th>
+            <td>177212</td>                    
+        </tr>
+        <tr>
+            <th scope="row">Görev Yeri</th>
+            <td>Çeşme Adliyesi</td>
+            <
+        </tr>
+        <tr>
+            <th scope="row">Görev Birimi</th>
+            <td>İcra Dairesi </td>
+        </tr>
+        <tr>
+            <th scope="row">Atanma Tarihi</th>
+            <td>2014</td>
+        </tr>
+        <tr>
+            <th scope="row">Doğum Yeri</th>
+            <td>Aksaray</td>
+        </tr>
+        <tr>
+            <th scope="row">Doğum Tarihi</th>
+            <td>1995</td>
+        </tr>
+        <tr>
+            <th scope="row">Cinsiyet</th>
+            <td>Erkek</td>
+        </tr>
+        <tr>
+            <th scope="row">Eposta</th>
+            <td>ab177212</td>
+        </tr>  
+        
+               
+    </tbody>
+</table>
+
+
+
+
+<select class="form-select form-select-sm" aria-label="Small select example">
+    <option selected>Talep Edilen Adliye</option>
+    <option value="2">Adana Adliyesi</option>
+    <option value="2">Bursa Adliyesi</option>
+</select>
+
+<select class="form-select form-select-sm" aria-label="Small select example">
+    <option selected>Talep Türü</option>
+    <option value="1">Naklen Atama</option>
+    <option value="2">Geçici Görevlendirme</option>
+</select>
+<button type="submit" class="btn btn-primary">Başvur</button>
