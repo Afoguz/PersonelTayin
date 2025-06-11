@@ -1,0 +1,12 @@
+﻿@using PersonelTayin.Entities
+
+<ul class="navbar-nav ms-auto">
+    @if (Context.User.Identity?.Name != null)
+    {
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline" id="logoutForm">               
+                
+            </form>
+        </li>
+    }
+ 

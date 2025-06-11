@@ -1,0 +1,69 @@
+﻿@model PersonelTayin.Models.Basvuru
+
+@{
+    ViewData["Title"] = "Tayin Talep Formu";
+}
+<link href="~/css/form.css" rel="stylesheet" />
+
+@if (!string.IsNullOrEmpty(TempData["Basarili"] as string))
+{
+    <div class="alert alert-success">@TempData["Basarili"]</div>
+}
+
+@* Hataları toplu göstermek yerine her alanın altında göstereceğiz. İsterseniz bu blok kalabilir. *@
+@* <div asp-validation-summary="All" class="alert alert-danger"></div> *@
+
+
+<div class="container pt-5 mt-4">
+    <div class="header mb-4 d-flex justify-content-between align-items-center">
+        <a href="/" class="logo">Personel Tayin Sistemi - Başvuru Ekranı</a>
+        <nav class="navbar">
+            <a href="/Account/Dashboard">Geri</a>
+            <a href="/Account/Logout">Oturumu Kapat</a>
+        </nav>
+    </div>
+
+    
+    <form asp-action="Basarili" method="post">
+
+        
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="form-group mb-3">
+            
+            <label asp-for="AdliyeAdiId" class="form-label">İl Seçin:</label>
+ 
+            <select asp-for="AdliyeAdiId" class="form-control" asp-items="@(new SelectList(ViewBag.AdliyeListesi, "Value", "Text"))">
+                <option value="">-- İl Seçiniz --</option>
+            </select>
+
+            
+            <span asp-validation-for="AdliyeAdiId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="BasvuruTuru" class="form-label">Tayin Türü:</label>
+            <select asp-for="BasvuruTuru" class="form-control">
+                <option value="">-- Tayin Türü Seçiniz --</option>
+                <option value="GeciciGorevlendirme">Geçici Görevlendirme</option>
+                <option value="NaklenAtama">Naklen Atama</option>
+            </select>
+            <span asp-validation-for="BasvuruTuru" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="Aciklama" class="form-label">Açıklama (En fazla 500 karakter):</label>
+            <textarea asp-for="Aciklama" class="form-control" maxlength="500" rows="4" placeholder="Durumunuzu detaylıca açıklayınız..."></textarea>
+            <span asp-validation-for="Aciklama" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Başvuru Gönder</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
